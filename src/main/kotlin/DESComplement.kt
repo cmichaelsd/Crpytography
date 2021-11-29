@@ -7,6 +7,21 @@ import javax.xml.bind.DatatypeConverter.printHexBinary
 import kotlin.experimental.xor
 
 class DESComplement(keyHex: String, plaintextHex: String) {
+
+    /*
+     * DES has a 64-bit plaintext which is split into two 32-bit halves L and R.
+     * This splitting is done by rearranging the bits in a semi-ordered fashion (this serves no cryptographic effect).
+     * A similar swapping happens at the end of encryption to create the 64-bit ciphertext from the two halves L and R.
+     * DES is of Feistel construction.
+     *
+     * L                          Ki              R
+     * |                          |               |
+     * ⊕ <- f(Bit shuffle <- S <- ⊕ <- Expand) <- |
+     * |                                          |
+     * Swap L and R and repeat round
+     */
+
+
     /**
      * Set initialization vector to a byte array of all zeros.
      */
